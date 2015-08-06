@@ -1,19 +1,22 @@
 #ifndef CMDNOTVALID_H
 #define CMDNOTVALID_H
 #include "Common.h"
+#include "Command.h"
 #include <iostream>
 #include <string>
+#include <vector>
+#include <sstream>
 
 class CCmdNotValid : public CCommand
 {
 public:
-	const std::string name;
-	CCmdNotValid(void);
+	static std::shared_ptr<CCmdNotValid> create(std::string s);
+	CCmdNotValid(int);
 	void execute(void);
 	~CCmdNotValid(void);
-	std::shared_ptr<CCommand> CCmdNotValid::create(std::string s);
 private:
-
+	void displayHelp(void);
+	void displayError(void);
 };
 
 #endif

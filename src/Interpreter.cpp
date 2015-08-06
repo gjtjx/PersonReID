@@ -4,23 +4,25 @@ using namespace std;
 CInterpreter::CInterpreter(CMainframe* thismainframe)
 {
 	mainframe = thismainframe;
-	cmd_table.insert({"notvalid",0});
-	cmd_table.insert({"loadimage",1});
+	cmd_table.insert(pair<string,int>("notvalid",0));
+	cmd_table.insert(pair<string,int>("loadimage",1));
 }
 
 shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 {
 	stringstream cmdline(ori_cmd);
 	string cmd_head;
+	string args;
 	cmdline>>cmd_head;
+	args = cmdline.str();
 
 	auto cmd_search_res = cmd_table.find(cmd_head);
 
 	shared_ptr<CCommand> this_cmd = nullptr;
-
+	// CCommand* ptrCmd=nullptr;
 	if( cmd_table.cend() == cmd_search_res )
 	{
-		this_cmd = make_shared<CCommand> ();
+		this_cmd = make_shared<CCmdNotValid>(CCmdNotValid(1));
 	}
 	else
 	{
@@ -30,23 +32,12 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 		{
 			case 0: 
 			{
-				this_cmd = make_shared<CCmdNotValid> (); 
+				this_cmd = CCmdNotValid::create(args);
 				break;
 			}
 			case 1:
 			{
-				string arg1;
-				cmdline>>arg1;
-				if(arg1=="-help") 
-				{
-					this_cmd = make_shared<CCmdLoadImage>("",nullptr,true);
-				}
-				else
-				{
-					
-				}
-				
-				break;
+				this_cmd = CCmdLoadImage::create(args, mainframe->src_img);
 			}
 		}
 	}
