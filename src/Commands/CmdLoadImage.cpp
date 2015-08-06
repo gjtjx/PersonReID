@@ -1,6 +1,6 @@
 #include "CmdLoadImage.h"
 using namespace std;
-
+using namespace cv;
 CCmdLoadImage::CCmdLoadImage(string path , shared_ptr<CImage> ptrImage , int init_status)
 {
 	name = "loadimage";
@@ -11,10 +11,27 @@ CCmdLoadImage::CCmdLoadImage(string path , shared_ptr<CImage> ptrImage , int ini
 
 void CCmdLoadImage::execute(void)
 {
-	switch(status)
+	try
 	{
+		switch(status)
+		{
 		case 0: displayHelp(); break;
+		case -1: displayError(); break;
+		case 1:
+			{
+				dstImage->loadImage(src_path);
+				dstImage->showImage();
+				waitKey();
+				break;
+			}
+		}
 	}
+	catch(cv::Exception err)
+	{
+		cout<<err.what()<<endl;
+		displayError();
+	}
+	
 }
 
 CCmdLoadImage::~CCmdLoadImage(void){};

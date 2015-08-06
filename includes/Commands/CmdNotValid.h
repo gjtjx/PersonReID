@@ -1,6 +1,6 @@
 #ifndef CMDNOTVALID_H
 #define CMDNOTVALID_H
-#include "Common.h"
+#include "Data.h"
 #include "Command.h"
 #include <iostream>
 #include <string>

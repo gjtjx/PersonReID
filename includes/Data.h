@@ -1,5 +1,5 @@
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef DATA_H
+#define DATA_H
 
 
 class CData

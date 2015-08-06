@@ -9,8 +9,10 @@ CCmdNotValid::CCmdNotValid(int init_status)
 
 void CCmdNotValid::execute()
 {
-	cout<<"error 0x001: Not a valid command."<<endl;
+	cout<<"ERROR 0x001: Not a valid command."<<endl;
 }
+
+CCmdNotValid::~CCmdNotValid(void){};
 
 shared_ptr<CCmdNotValid> CCmdNotValid::create(string sargs)
 {
@@ -18,24 +20,40 @@ shared_ptr<CCmdNotValid> CCmdNotValid::create(string sargs)
 	stringstream ssargs(sargs);
 	string arg;
 	shared_ptr<CCmdNotValid> this_cmd;
-	CCmdNotValid* ptrCmd=nullptr;
+
 	while(ssargs>>arg) args.push_back(arg);
 
 	if(args.size()>=2)
 	{
-		this_cmd = make_shared<CCmdNotValid>(new CCmdNotValid(-1));
+		auto target = new CCmdNotValid(-1);
+		this_cmd = make_shared<CCmdNotValid>(*target);
 	}
 	else if( 0==args.size()) 
 	{
-		this_cmd = make_shared<CCmdNotValid>(new CCmdNotValid(1));
+		auto target = new CCmdNotValid(1);
+		this_cmd = make_shared<CCmdNotValid>(*target);
 	}
 	else if(args.front()=="-help")
 	{
-		this_cmd = make_shared<CCmdNotValid>(new CCmdNotValid(0));
+		auto target = new CCmdNotValid(0);
+		this_cmd = make_shared<CCmdNotValid>(*target);
 	}
 	else
 	{
-		this_cmd = make_shared<CCmdNotValid>(new CCmdNotValid(-1));
+		auto target = new CCmdNotValid(-1);
+		this_cmd = make_shared<CCmdNotValid>(*target);
 	}
 	return this_cmd;
+}
+
+void CCmdNotValid::displayHelp(void)
+{
+	cout<<name<<endl;
+	cout<<"this is a notvalid help"<<endl;
+}
+
+void CCmdNotValid::displayError(void)
+{
+	cout<<name<<endl;
+	cout<<"this is a notvalid error"<<endl;
 }
