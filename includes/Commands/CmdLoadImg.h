@@ -9,11 +9,11 @@ class CCmdLoadImg : public CCommand
 public:
 	CCmdLoadImg(std::string sargs, std::shared_ptr<CImage>);
 	CCmdLoadImg(std::string src_path, int status, std::shared_ptr<CImage>);
-	void execute(void);
+	void execute(void) override;
 	~CCmdLoadImg(void);
+	void displayHelp(void) override;
+	void displayError(void) override;
 private:
-	void displayHelp(void);
-	void displayError(void);
 	std::string src_path;
 	std::shared_ptr<CImage> dstImage;
 };

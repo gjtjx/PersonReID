@@ -13,10 +13,9 @@ public:
 	CCmdNotValid(int status);
 	CCmdNotValid(std::string args);
 	~CCmdNotValid(void);
-	void execute(void);
-private:
-	void displayHelp(void);
-	void displayError(void);
+	void execute(void) override;
+	void displayHelp(void) override;
+	void displayError(void) override;
 };
 
 #endif

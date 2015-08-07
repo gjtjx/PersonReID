@@ -1,10 +1,9 @@
 #include "CmdHelp.h"
 using namespace std;
 
-CCmdHelp::CCmdHelp(int init_status):CCommand("help", init_status)
-{
+CCmdHelp::CCmdHelp(int init_status):CCommand("help", init_status){}
 
-}
+
 
 void CCmdHelp::execute(void)
 {
@@ -13,3 +12,13 @@ void CCmdHelp::execute(void)
 
 
 CCmdHelp::~CCmdHelp(void){}
+
+void CCmdHelp::displayHelp(void)
+{
+
+}
+
+void CCmdHelp::displayError(void)
+{
+
+}

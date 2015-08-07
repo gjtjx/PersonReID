@@ -9,10 +9,11 @@ class CCmdHelp : public CCommand
 {
 public:
 	CCmdHelp(int type);
-	void execute(void);
+	CCmdHelp(std::string sargs);
 	~CCmdHelp(void);
-private:
-
+	void execute(void) override;
+	void displayHelp(void) override;
+	void displayError(void) override;
 };
 
 
