@@ -1,0 +1,2 @@
+cd $(dirname $_)
+./PIDEXE

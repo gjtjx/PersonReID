@@ -14,15 +14,18 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 	string cmd_head;
 	string args;
 	cmdline>>cmd_head;
-	args = cmdline.str();
-
+	while(cmdline>>args);
+	// args = cmdline.str();
+	// cout<<"cmd_head:"<<cmd_head<<endl;
+	// cout<<"args:"<<args<<endl;
 	auto cmd_search_res = cmd_table.find(cmd_head);
 
 	shared_ptr<CCommand> this_cmd = nullptr;
 	// CCommand* ptrCmd=nullptr;
 	if( cmd_table.cend() == cmd_search_res )
 	{
-		this_cmd = make_shared<CCmdNotValid>(CCmdNotValid(1));
+		auto target = new CCmdNotValid(1);
+		this_cmd = make_shared<CCmdNotValid>(*target);
 	}
 	else
 	{

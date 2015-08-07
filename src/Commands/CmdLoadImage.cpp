@@ -1,6 +1,6 @@
 #include "CmdLoadImage.h"
 using namespace std;
-
+using namespace cv;
 CCmdLoadImage::CCmdLoadImage(string path , shared_ptr<CImage> ptrImage , int init_status)
 {
 	name = "loadimage";
@@ -11,26 +11,43 @@ CCmdLoadImage::CCmdLoadImage(string path , shared_ptr<CImage> ptrImage , int ini
 
 void CCmdLoadImage::execute(void)
 {
-	switch(status)
+	try
 	{
+		switch(status)
+		{
 		case 0: displayHelp(); break;
+		case -1: displayError(); break;
+		case 1:
+			{
+				dstImage->loadImage(src_path);
+				dstImage->showImage();
+				waitKey();
+				break;
+			}
+		}
 	}
+	catch(cv::Exception err)
+	{
+		cout<<err.what()<<endl;
+		displayError();
+	}
+	
 }
 
 CCmdLoadImage::~CCmdLoadImage(void){};
 
 void CCmdLoadImage::displayHelp(void)
 {
-	cout<<name<<endl;
-	cout<<"Discription: Load an image into the current image slot"<<endl;
-	cout<<"Format: loadimage [-PATH]"<<endl;
+	cout<<"\t"<<name<<endl;
+	cout<<"\t"<<"Discription: Load an image into the current image slot"<<endl;
+	cout<<"\t"<<"Format: loadimage [-PATH]"<<endl;
 }
 
 void CCmdLoadImage::displayError()
 {
-	cout<<name<<endl;
-	cout<<"ERROR 0x002: Load image failed."<<endl;
-	cout<<"for more information, please use : loadimage -help"<<endl;
+	cout<<"\t"<<name<<endl;
+	cout<<"\t"<<"ERROR 0x002: Load image failed."<<endl;
+	cout<<"\t"<<"for more information, please use : loadimage -help"<<endl;
 }
 
 
