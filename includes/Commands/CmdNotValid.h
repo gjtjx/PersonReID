@@ -10,13 +10,12 @@
 class CCmdNotValid : public CCommand
 {
 public:
-	static std::shared_ptr<CCmdNotValid> create(std::string s);
-	CCmdNotValid(int);
-	void execute(void);
+	CCmdNotValid(int status);
+	CCmdNotValid(std::string args);
 	~CCmdNotValid(void);
-private:
-	void displayHelp(void);
-	void displayError(void);
+	void execute(void) override;
+	void displayHelp(void) override;
+	void displayError(void) override;
 };
 
 #endif
