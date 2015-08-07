@@ -9,7 +9,7 @@ public:
 	CCommand(void);
 	int status;
 	std::string name;
-	virtual void execute(void);
+	virtual void execute(void) = 0;
 	virtual ~CCommand(void);
 private:
 	virtual void displayHelp(void);
