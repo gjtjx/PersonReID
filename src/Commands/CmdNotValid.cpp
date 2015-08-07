@@ -9,7 +9,7 @@ CCmdNotValid::CCmdNotValid(int init_status)
 
 void CCmdNotValid::execute()
 {
-	cout<<"ERROR 0x001: Not a valid command."<<endl;
+	cout<<"    "<<"ERROR 0x001: Not a valid command."<<endl;
 }
 
 CCmdNotValid::~CCmdNotValid(void){};
@@ -48,12 +48,12 @@ shared_ptr<CCmdNotValid> CCmdNotValid::create(string sargs)
 
 void CCmdNotValid::displayHelp(void)
 {
-	cout<<name<<endl;
-	cout<<"this is a notvalid help"<<endl;
+	cout<<"    "<<name<<endl;
+	cout<<"    "<<"this is a notvalid help"<<endl;
 }
 
 void CCmdNotValid::displayError(void)
 {
-	cout<<name<<endl;
-	cout<<"this is a notvalid error"<<endl;
+	cout<<"    "<<name<<endl;
+	cout<<"    "<<"this is a notvalid error"<<endl;
 }

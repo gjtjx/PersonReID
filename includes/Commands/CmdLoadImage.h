@@ -1,6 +1,6 @@
 #ifndef CMDLOADIMAGE_H
 #define CMDLOADIMAGE_H
-#include "Image.h"
+#include "Data.h"
 #include "Command.h"
 #include <string>
 

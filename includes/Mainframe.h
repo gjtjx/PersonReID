@@ -5,7 +5,6 @@
 #include <vector>
 #include "Data.h"
 #include <memory>
-#include "Image.h"
 
 class CMainframe
 {

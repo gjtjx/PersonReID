@@ -16,8 +16,8 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 	cmdline>>cmd_head;
 	while(cmdline>>args);
 	// args = cmdline.str();
-	cout<<"cmd_head:"<<cmd_head<<endl;
-	cout<<"args:"<<args<<endl;
+	// cout<<"cmd_head:"<<cmd_head<<endl;
+	// cout<<"args:"<<args<<endl;
 	auto cmd_search_res = cmd_table.find(cmd_head);
 
 	shared_ptr<CCommand> this_cmd = nullptr;
