@@ -19,8 +19,6 @@ void CCmdLoadImg::execute(void)
 		case 1:
 			{
 				dstImage->loadImage(src_path);
-				dstImage->showImage();
-				waitKey();
 				break;
 			}
 		}
