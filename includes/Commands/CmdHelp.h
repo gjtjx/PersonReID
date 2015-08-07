@@ -2,8 +2,6 @@
 #define CMDHELP_H
 
 #include "Command.h"
-#include <string>
-#include <iostream>
 
 class CCmdHelp : public CCommand
 {
@@ -14,6 +12,7 @@ public:
 	void execute(void) override;
 	void displayHelp(void) override;
 	void displayError(void) override;
+	void displayCmdhelp(int cmd_serial);
 };
 
 

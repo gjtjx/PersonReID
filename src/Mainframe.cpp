@@ -5,7 +5,7 @@ void CMainframe::Run(void)
 {
 	string lastCmdName = "";
 	CInterpreter interpreter(this);
-	while("Exit" != lastCmdName)
+	while("exit" != lastCmdName)
 	{
 		cout<<"PersonReID>>";
 		string input_command;

@@ -4,7 +4,9 @@ using namespace std;
 CInterpreter::CInterpreter(CMainframe* thismainframe)
 {
 	mainframe = thismainframe;
-	cmd_table.insert(pair<string,int>("notvalid",0));
+	cmd_table.insert(pair<string,int>("exit",-2));
+	cmd_table.insert(pair<string,int>("notvalid",-1));
+	cmd_table.insert(pair<string,int>("help",0));
 	cmd_table.insert(pair<string,int>("loadimg",1));
 }
 
@@ -33,16 +35,33 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 
 		switch(cmd_serial)
 		{
-			case 0: 
+			case -2:
+			{
+				CCmdExit* tmp_cmd = new CCmdExit(sargs);
+				this_cmd = make_shared<CCmdExit>(*tmp_cmd);
+				break;
+			}
+			case -1: 
 			{
 				CCmdNotValid* tmp_cmd = new CCmdNotValid(sargs);
 				this_cmd = make_shared<CCmdNotValid>(*tmp_cmd);
+				break;
+			}
+			case 0:
+			{
+				CCmdHelp* tmp_cmd = new CCmdHelp(sargs);
+				this_cmd = make_shared<CCmdHelp>(*tmp_cmd);
 				break;
 			}
 			case 1:
 			{
 				CCmdLoadImg* tmp_cmd = new CCmdLoadImg(sargs,mainframe->src_img);
 				this_cmd = make_shared<CCmdLoadImg>(*tmp_cmd);
+				break;
+			}
+			default:
+			{
+
 			}
 		}
 	}

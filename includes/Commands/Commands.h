@@ -3,5 +3,7 @@
 
 #include "CmdLoadImg.h"
 #include "CmdNotValid.h"
+#include "CmdExit.h"
+#include "CmdHelp.h"
 
 #endif
