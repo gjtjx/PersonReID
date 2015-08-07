@@ -6,11 +6,11 @@ MESSAGE(STATUS "This is SOURCE dir " ${PROJECT_SOURCE_DIR})
 
 set(CMAKE_BUILD_TYPE "Release")
 
-if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+if( CMAKE_BUILD_TYPE STREQUAL "Release" )
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wc++11-extensions -std=c++11 -g -Wall -Wno-unused-variable -pthread")
-else( CMAKE_BUILD_TYPE STREQUAL "Debug" )
-        set(CMAKE_BUILD_TYPE "Release")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wc++11-extensions -std=c++11 -O2 -pthread -fopenmp")
-endif( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+else()
+    set(CMAKE_BUILD_TYPE "Release")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-c++11-extensions -std=c++11 -O2 -pthread -fopenmp ")
+endif()
 
 message("Build Type:" ${CMAKE_BUILD_TYPE} ${CMAKE_CXX_FLAGS})

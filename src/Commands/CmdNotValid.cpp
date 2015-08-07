@@ -1,11 +1,7 @@
 #include "CmdNotValid.h"
 using namespace std;
 
-CCmdNotValid::CCmdNotValid(int init_status)
-{
-	name = "notvalid";
-	status = init_status;
-}
+CCmdNotValid::CCmdNotValid(int init_status):CCommand("notvalid",init_status){}
 
 void CCmdNotValid::execute()
 {
@@ -14,46 +10,40 @@ void CCmdNotValid::execute()
 
 CCmdNotValid::~CCmdNotValid(void){};
 
-shared_ptr<CCmdNotValid> CCmdNotValid::create(string sargs)
+CCmdNotValid::CCmdNotValid(string sargs):CCommand("notvalid")
 {
 	vector<string> args;
 	stringstream ssargs(sargs);
 	string arg;
-	shared_ptr<CCmdNotValid> this_cmd;
 
 	while(ssargs>>arg) args.push_back(arg);
 
 	if(args.size()>=2)
 	{
-		auto target = new CCmdNotValid(-1);
-		this_cmd = make_shared<CCmdNotValid>(*target);
+		setStatus(-1);
 	}
 	else if( 0==args.size()) 
 	{
-		auto target = new CCmdNotValid(1);
-		this_cmd = make_shared<CCmdNotValid>(*target);
+		setStatus(1);
 	}
 	else if(args.front()=="-help")
 	{
-		auto target = new CCmdNotValid(0);
-		this_cmd = make_shared<CCmdNotValid>(*target);
+		setStatus(0);
 	}
 	else
 	{
-		auto target = new CCmdNotValid(-1);
-		this_cmd = make_shared<CCmdNotValid>(*target);
+		setStatus(-1);
 	}
-	return this_cmd;
 }
 
 void CCmdNotValid::displayHelp(void)
 {
-	cout<<"    "<<name<<endl;
+	cout<<"    "<<getName()<<endl;
 	cout<<"    "<<"this is a notvalid help"<<endl;
 }
 
 void CCmdNotValid::displayError(void)
 {
-	cout<<"    "<<name<<endl;
+	cout<<"    "<<getName()<<endl;
 	cout<<"    "<<"this is a notvalid error"<<endl;
 }
