@@ -5,5 +5,6 @@
 #include "CmdNotValid.h"
 #include "CmdExit.h"
 #include "CmdHelp.h"
+#include "CCmdListRcs.h"
 
 #endif

@@ -8,6 +8,7 @@ CInterpreter::CInterpreter(CMainframe* thismainframe)
 	cmd_table.insert(pair<string,int>("notvalid",-1));
 	cmd_table.insert(pair<string,int>("help",0));
 	cmd_table.insert(pair<string,int>("loadimg",1));
+	cmd_table.insert(pair<string,int>("listrcs",2));
 }
 
 shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
@@ -57,6 +58,12 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 			{
 				CCmdLoadImg* tmp_cmd = new CCmdLoadImg(sargs,mainframe->src_img);
 				this_cmd = make_shared<CCmdLoadImg>(*tmp_cmd);
+				break;
+			}
+			case 2:
+			{
+				CCmdListRcs* tmp_cmd = new CCmdListRcs(sargs,mainframe->src_img,mainframe->dst_img,mainframe->resources);
+				this_cmd = make_shared<CCmdListRcs>(*tmp_cmd);
 				break;
 			}
 			default:

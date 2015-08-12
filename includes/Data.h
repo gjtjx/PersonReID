@@ -21,7 +21,6 @@ public:
 	void loadImage(std::string);
 	void showImage(void);
 	~CImage(void);
-private:
 	cv::Mat data;
 };
 
