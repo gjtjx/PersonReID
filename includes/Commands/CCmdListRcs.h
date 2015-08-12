@@ -6,8 +6,8 @@
 class CCmdListRcs : public CCommand
 {
 public:
-	CCmdListRcs(std::string sargs, std::shared_ptr<CImage>, std::shared_ptr<CImage>,std::vector< std::shared_ptr<CImage> >);
-	CCmdListRcs(int status, std::shared_ptr<CImage>, std::shared_ptr<CImage>,std::vector< std::shared_ptr<CImage> > );
+	CCmdListRcs(std::string sargs, std::shared_ptr<CImage>, std::shared_ptr<CImage>,std::vector< std::shared_ptr<CImage> >*);
+	CCmdListRcs(int status, std::shared_ptr<CImage>, std::shared_ptr<CImage>,std::vector< std::shared_ptr<CImage> >* );
 	void execute(void) override;
 	~CCmdListRcs(void);
 	void displayError(void) override;
@@ -15,7 +15,7 @@ public:
 private:
 	std::shared_ptr<CImage> src_img;
 	std::shared_ptr<CImage> dst_img;
-	std::vector< std::shared_ptr<CImage> > rcs;
+	std::vector< std::shared_ptr<CImage> >*rcs;
 };
 
 

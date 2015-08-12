@@ -2,7 +2,7 @@
 using namespace std;
 using namespace cv;
 
-CCmdListRcs::CCmdListRcs(std::string sargs, std::shared_ptr<CImage> src, std::shared_ptr<CImage> dst,std::vector< std::shared_ptr<CImage> >resource):CCommand("listrcs")
+CCmdListRcs::CCmdListRcs(std::string sargs, std::shared_ptr<CImage> src, std::shared_ptr<CImage> dst,std::vector< std::shared_ptr<CImage> >*resource):CCommand("listrcs")
 {
 	vector<string> args;
 	stringstream ssargs(sargs);
@@ -35,7 +35,7 @@ CCmdListRcs::CCmdListRcs(std::string sargs, std::shared_ptr<CImage> src, std::sh
 	rcs = resource;
 }
 
-CCmdListRcs::CCmdListRcs(int status, std::shared_ptr<CImage> src, std::shared_ptr<CImage> dst,std::vector< std::shared_ptr<CImage> > resource):CCommand("listrcs",status)
+CCmdListRcs::CCmdListRcs(int status, std::shared_ptr<CImage> src, std::shared_ptr<CImage> dst,std::vector< std::shared_ptr<CImage> >* resource):CCommand("listrcs",status)
 {
 	src_img = src;
 	dst_img = dst;
@@ -55,12 +55,12 @@ void CCmdListRcs::execute(void)
 			}
 			case 1:
 			{
-				cout<<"    "<<"src: "<<src_img->data.size().width<<"*"<<src_img->data.size().height<<endl;
-				cout<<"    "<<"dst: "<<dst_img->data.size().width<<"*"<<dst_img->data.size().height<<endl;
+				cout<<"    "<<"src: "<<src_img->getWidth()<<"*"<<src_img->getHeight()<<endl;
+				cout<<"    "<<"dst: "<<dst_img->getWidth()<<"*"<<dst_img->getHeight()<<endl;
 				int i = 1;
-				for(auto picptr: rcs)
+				for(auto picptr: *rcs)
 				{
-					cout<<"    "<<"Picture"<<i++<<": "<<picptr->data.size().width<<"*"<<picptr->data.size().height<<endl;
+					cout<<"    "<<"Picture"<<i++<<": "<<picptr->getWidth()<<"*"<<picptr->getHeight()<<endl;
 				}
 				break;
 			}

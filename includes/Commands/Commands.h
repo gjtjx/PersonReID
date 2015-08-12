@@ -6,5 +6,6 @@
 #include "CmdExit.h"
 #include "CmdHelp.h"
 #include "CCmdListRcs.h"
+#include "CCmdAddImg.h"
 
 #endif

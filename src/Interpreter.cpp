@@ -9,6 +9,7 @@ CInterpreter::CInterpreter(CMainframe* thismainframe)
 	cmd_table.insert(pair<string,int>("help",0));
 	cmd_table.insert(pair<string,int>("loadimg",1));
 	cmd_table.insert(pair<string,int>("listrcs",2));
+	cmd_table.insert(pair<string,int>("addimg",3));
 }
 
 shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
@@ -62,9 +63,14 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 			}
 			case 2:
 			{
-				CCmdListRcs* tmp_cmd = new CCmdListRcs(sargs,mainframe->src_img,mainframe->dst_img,mainframe->resources);
+				CCmdListRcs* tmp_cmd = new CCmdListRcs(sargs,mainframe->src_img,mainframe->dst_img,&mainframe->resources);
 				this_cmd = make_shared<CCmdListRcs>(*tmp_cmd);
 				break;
+			}
+			case 3:
+			{
+				CCmdAddImg* tmp_cmd = new CCmdAddImg(sargs,&mainframe->resources);
+				this_cmd = make_shared<CCmdAddImg>(*tmp_cmd);
 			}
 			default:
 			{
