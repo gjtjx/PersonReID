@@ -2,20 +2,19 @@
 #define CMDLISTRCS_H
 #include "Command.h"
 #include "Data.h"
+#include <unordered_map>
 
 class CCmdListRcs : public CCommand
 {
 public:
-	CCmdListRcs(std::string sargs, std::shared_ptr<CImage>, std::shared_ptr<CImage>,std::vector< std::shared_ptr<CImage> >*);
-	CCmdListRcs(int status, std::shared_ptr<CImage>, std::shared_ptr<CImage>,std::vector< std::shared_ptr<CImage> >* );
+	CCmdListRcs(std::string sargs, std::unordered_map<std::string,std::shared_ptr<CImage> > *resources);
+	CCmdListRcs(int status, std::unordered_map<std::string,std::shared_ptr<CImage> > *resources);
 	void execute(void) override;
 	~CCmdListRcs(void);
 	void displayError(int err_num = 0) override;
 	void displayHelp(void) override;
 private:
-	std::shared_ptr<CImage> src_img;
-	std::shared_ptr<CImage> dst_img;
-	std::vector< std::shared_ptr<CImage> >*rcs;
+	std::unordered_map<std::string,std::shared_ptr<CImage> > *rcs;
 };
 
 

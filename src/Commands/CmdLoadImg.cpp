@@ -30,12 +30,14 @@ void CCmdLoadImg::execute(void)
 				auto iter = rcs->find(dst_id);
 				if(iter==rcs->end())
 				{
+					cout<<"    "<<"Added image into storage: "<<dst_id<<endl;
 					shared_ptr<CImage> img = make_shared<CImage>();
 					img->loadImage(src_path);
-					rcs->insert({dst_id,img});
+					rcs->insert(pair<string,shared_ptr<CImage> > (dst_id,img));
 				}
 				else
 				{
+					cout<<"    "<<"Replaced this image with image loaded from file: "<<dst_id<<endl;
 					iter->second->loadImage(src_path);
 				}
 				break;
@@ -74,7 +76,10 @@ CCmdLoadImg::CCmdLoadImg(std::string sargs, std::unordered_map<std::string,std::
 	stringstream ssargs(sargs);
 	string arg;
 	while(ssargs>>arg) args.push_back(arg);
-
+	// cout<<"args.size()"<<args.size()<<endl;
+	// cout<<args.front()<<endl;
+	// cout<<"ss"<<ssargs.str()<<endl;
+	// cout<<"s"<<sargs<<endl;
 	if(1==args.size())
 	{
 		if("-help"==args.front()) 

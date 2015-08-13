@@ -2,19 +2,16 @@
 using namespace std;
 using namespace cv;
 
-CCmdAddImg::CCmdAddImg(std::string sargs, std::vector< std::shared_ptr<CImage> >*resource):CCommand("addimg")
+CCmdAddImg::CCmdAddImg(std::string sargs, std::unordered_map<std::string,std::shared_ptr<CImage> > *resources):CCommand("addimg")
 {
+	rcs = resources;
 	vector<string> args;
 	stringstream ssargs(sargs);
 	string arg;
 
 	while(ssargs>>arg) args.push_back(arg);
 
-	if(args.size()==0)
-	{
-		setStatus(1);
-	}
-	else if(args.size()==1)
+	if(args.size()==1)
 	{
 		if("-help"==args.front()) 
 		{
@@ -22,21 +19,22 @@ CCmdAddImg::CCmdAddImg(std::string sargs, std::vector< std::shared_ptr<CImage> >
 		}
 		else
 		{
-			setStatus(-1);
+			setStatus(1);
+			dst_id = args.front();
 		}
 	}
+	
 	else
 	{
 		setStatus(-1);
 	}
-
-	rcs = resource;
 }
 
 
-CCmdAddImg::CCmdAddImg(int status, std::vector< std::shared_ptr<CImage> >*resource):CCommand("addimg",status)
+CCmdAddImg::CCmdAddImg(int status,string id, std::unordered_map<std::string,std::shared_ptr<CImage> > *resources):CCommand("addimg",status)
 {
-	rcs = resource;
+	rcs = resources;
+	dst_id = id;
 }
 
 
@@ -60,10 +58,18 @@ void CCmdAddImg::execute(void)
 				}
 				else
 				{
-					CImage* tmp_img = new CImage();
-					shared_ptr<CImage> tmp_ptr = make_shared<CImage>(*tmp_img);
-					rcs->push_back(tmp_ptr);
-					cout<<"    "<<"Successfully added image "<<rcs->size()-1<<endl;
+					auto iter = rcs->find(dst_id);
+					if(iter==rcs->end())
+					{
+						shared_ptr<CImage> img = make_shared<CImage>();
+						rcs->insert(pair<string,shared_ptr<CImage> > (dst_id,img));
+						cout<<"    "<<"Successfully added image: "<<dst_id<<endl;
+					}
+					else
+					{
+						cout<<"    "<<"Failed to added image, resource id already exists."<<endl;
+					}
+					
 					break;
 				}		
 			}

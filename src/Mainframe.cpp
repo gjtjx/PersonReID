@@ -20,6 +20,6 @@ CMainframe::CMainframe(void)
 {
 	shared_ptr<CImage> src = make_shared<CImage>();
 	shared_ptr<CImage> dst = make_shared<CImage>();
-	resources.insert({"src",src});
-	resources.insert({"dst",dst});
+	resources.insert(pair<string,shared_ptr<CImage> > ("src",src));
+	resources.insert(pair<string,shared_ptr<CImage> > ("dst",dst));
 }

@@ -3,16 +3,16 @@
 using namespace std;
 using namespace cv;
 
-CCmdDelImg::CCmdDelImg(int init_status, int init_serial, std::vector< std::shared_ptr<CImage> >*resource):CCommand("delimg", init_status)
+CCmdDelImg::CCmdDelImg(int init_status, std::string id, std::unordered_map<std::string,std::shared_ptr<CImage> > *resources):CCommand("delimg", init_status)
 {
-	rcs = resource;
-	serial = init_serial;
+	rcs = resources;
+	dst_id = id;
 	
 }
 
-CCmdDelImg::CCmdDelImg(std::string sargs, std::vector< std::shared_ptr<CImage> >*resource)
+CCmdDelImg::CCmdDelImg(std::string sargs,std::unordered_map<std::string,std::shared_ptr<CImage> > *resources):CCommand("delimg")
 {
-	rcs = resource;
+	rcs = resources;
 	vector<string> args;
 	stringstream ssargs(sargs);
 	string arg;
@@ -27,14 +27,7 @@ CCmdDelImg::CCmdDelImg(std::string sargs, std::vector< std::shared_ptr<CImage> >
 		else
 		{
 			setStatus(1);
-			try
-			{
-				serial = stoi(args.front());	
-			}catch(exception err)
-			{
-				setStatus(-1);
-				cout<<err.what();
-			}
+			dst_id = args.front();
 			
 		}
 	}
@@ -57,14 +50,19 @@ void CCmdDelImg::execute(void)
 			}
 			case 1:
 			{
-				if(serial>=(rcs->size()))
+				auto img = rcs->find(dst_id);
+				if(img==rcs->end())
 				{
 					cout<<"    "<<"ERROR: No such resource."<<endl;
 				}
+				else if( dst_id =="src" || dst_id=="dst")
+				{
+					cout<<"    "<<"ERROR: Can not delete built in image."<<endl;
+				}
 				else
 				{
-					rcs->erase(rcs->begin()+serial);
-					cout<<"    "<<"Successfully deleted image"<<endl;
+					rcs->erase(img);
+					cout<<"    "<<"Successfully deleted image: "<<dst_id<<endl;
 				}
 				break;
 			}
