@@ -8,4 +8,6 @@
 #include "CmdListRcs.h"
 #include "CmdAddImg.h"
 #include "CmdDelImg.h"
+#include "CmdSaveImg.h"
+
 #endif

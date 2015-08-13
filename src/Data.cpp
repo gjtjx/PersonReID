@@ -30,3 +30,8 @@ cv::Mat* CImage::getData(void)
 {
 	return &data;
 }
+
+void CImage::saveImage(std::string path)
+{
+	imwrite(path, data);
+}

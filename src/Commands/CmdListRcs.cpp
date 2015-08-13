@@ -55,6 +55,7 @@ void CCmdListRcs::execute(void)
 				cout<<"    "<<"src: "<<img->second->getWidth()<<"*"<<img->second->getHeight()<<endl;
 				img = rcs->find("dst");
 				cout<<"    "<<"dst: "<<img->second->getWidth()<<"*"<<img->second->getHeight()<<endl;
+				cout<<"    "<<"-----------------------------------------------"<<endl;
 				for(auto picptr: *rcs)
 				{
 					if(picptr.first!="src" && picptr.first!="dst")

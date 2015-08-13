@@ -1,3 +1,6 @@
+#ifndef CMDDELIMG_H
+#define CMDDELIMG_H
+
 #include "Command.h"
 #include "Data.h"
 #include <string>
@@ -16,3 +19,5 @@ private:
 	std::unordered_map<std::string,std::shared_ptr<CImage> > *rcs;
 	std::string dst_id;
 };
+
+#endif

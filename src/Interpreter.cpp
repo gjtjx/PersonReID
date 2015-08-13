@@ -11,6 +11,7 @@ CInterpreter::CInterpreter(CMainframe* thismainframe)
 	cmd_table.insert(pair<string,int>("listrcs",2));
 	cmd_table.insert(pair<string,int>("addimg",3));
 	cmd_table.insert(pair<string,int>("delimg",4));
+	cmd_table.insert(pair<string,int>("saveimg",5));
 }
 
 shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
@@ -74,6 +75,11 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 			case 4:
 			{
 				this_cmd = make_shared<CCmdDelImg>(sargs,rcs);
+				break;
+			}
+			case 5:
+			{
+				this_cmd = make_shared<CCmdSaveImg>(sargs,rcs);
 				break;
 			}
 			default:

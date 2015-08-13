@@ -37,7 +37,7 @@ void CCmdLoadImg::execute(void)
 				}
 				else
 				{
-					cout<<"    "<<"Replaced this image with image loaded from file: "<<dst_id<<endl;
+					cout<<"    "<<"Replaced image "<< dst_id <<" with image loaded from "<<src_path<<endl;
 					iter->second->loadImage(src_path);
 				}
 				break;
