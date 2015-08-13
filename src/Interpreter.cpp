@@ -10,10 +10,12 @@ CInterpreter::CInterpreter(CMainframe* thismainframe)
 	cmd_table.insert(pair<string,int>("loadimg",1));
 	cmd_table.insert(pair<string,int>("listrcs",2));
 	cmd_table.insert(pair<string,int>("addimg",3));
+	cmd_table.insert(pair<string,int>("delimg",4));
 }
 
 shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 {
+	auto rcs = &(mainframe->resources);
 	stringstream cmdline(ori_cmd);
 	string cmd_head;
 	string sargs;
@@ -39,14 +41,12 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 		{
 			case -2:
 			{
-				CCmdExit* tmp_cmd = new CCmdExit(sargs);
-				this_cmd = make_shared<CCmdExit>(*tmp_cmd);
+				this_cmd = make_shared<CCmdExit>(sargs);
 				break;
 			}
 			case -1: 
 			{
-				CCmdNotValid* tmp_cmd = new CCmdNotValid(sargs);
-				this_cmd = make_shared<CCmdNotValid>(*tmp_cmd);
+				this_cmd = make_shared<CCmdNotValid>(sargs);
 				break;
 			}
 			case 0:
@@ -57,7 +57,7 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 			}
 			case 1:
 			{
-				CCmdLoadImg* tmp_cmd = new CCmdLoadImg(sargs,mainframe->src_img);
+				CCmdLoadImg* tmp_cmd = new CCmdLoadImg(sargs,mainframe->src);
 				this_cmd = make_shared<CCmdLoadImg>(*tmp_cmd);
 				break;
 			}
@@ -69,8 +69,15 @@ shared_ptr<CCommand> CInterpreter::interpret(string ori_cmd)
 			}
 			case 3:
 			{
-				CCmdAddImg* tmp_cmd = new CCmdAddImg(sargs,&mainframe->resources);
+				CCmdAddImg* tmp_cmd = new CCmdAddImg(sargs,&(mainframe->resources));
 				this_cmd = make_shared<CCmdAddImg>(*tmp_cmd);
+				break;
+			}
+			case 4:
+			{
+				auto ptr_rcs = &(mainframe->resources);
+				this_cmd = make_shared<CCmdDelImg>(sargs,ptr_rcs);
+				break;
 			}
 			default:
 			{

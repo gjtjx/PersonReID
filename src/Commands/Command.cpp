@@ -22,6 +22,6 @@ int CCommand::getStatus(void)
 	return status;
 }
 
-void CCommand::displayError(void){}
+void CCommand::displayError(int err_num){}
 
 void CCommand::displayHelp(void){}

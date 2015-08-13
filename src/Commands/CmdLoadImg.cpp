@@ -2,10 +2,11 @@
 using namespace std;
 using namespace cv;
 
-CCmdLoadImg::CCmdLoadImg(string path, int init_status, shared_ptr<CImage> ptrImg ):CCommand("loadimg",init_status)
+CCmdLoadImg::CCmdLoadImg(std::string path, std::string id, int init_status, std::unordered_map<std::string,std::shared_ptr<CImage> > *resources):CCommand("loadimg",init_status)
 {
 	src_path = path;
-	dstImage = ptrImg;
+	rcs = resources;
+	dst_id = id;
 }
 
 void CCmdLoadImg::execute(void)
@@ -14,11 +15,29 @@ void CCmdLoadImg::execute(void)
 	{
 		switch(getStatus())
 		{
-		case 0: displayHelp(); break;
-		case -1: displayError(); break;
-		case 1:
+			case 0:
 			{
-				dstImage->loadImage(src_path);
+				displayHelp(); 
+				break;
+			} 
+			case -1: 
+			{
+				displayError(); 
+				break;
+			}
+			case 1:
+			{
+				auto iter = rcs->find(dst_id);
+				if(iter==rcs->end())
+				{
+					shared_ptr<CImage> img = make_shared<CImage>();
+					img->loadImage(src_path);
+					rcs->insert({dst_id,img});
+				}
+				else
+				{
+					iter->second->loadImage(src_path);
+				}
 				break;
 			}
 		}
@@ -40,16 +59,17 @@ void CCmdLoadImg::displayHelp(void)
 	cout<<"    "<<"Format: loadimage [-PATH]"<<endl;
 }
 
-void CCmdLoadImg::displayError()
+void CCmdLoadImg::displayError(int err_num)
 {
 	cout<<"    "<<getName()<<endl;
 	cout<<"    "<<"ERROR 0x002: Load image failed."<<endl;
-	cout<<"    "<<"for more information, please use : loadimage -help"<<endl;
+	cout<<"    "<<"for more information, please use : loadimg -help"<<endl;
 }
 
 
-CCmdLoadImg::CCmdLoadImg(string sargs, shared_ptr<CImage> ptrImg)
+CCmdLoadImg::CCmdLoadImg(std::string sargs, std::unordered_map<std::string,std::shared_ptr<CImage> > *resources):CCommand("loadimg")
 {
+	rcs = resources;
 	vector<string> args;
 	stringstream ssargs(sargs);
 	string arg;
@@ -61,20 +81,24 @@ CCmdLoadImg::CCmdLoadImg(string sargs, shared_ptr<CImage> ptrImg)
 		{
 			setStatus(0);
 			src_path = "";
-			dstImage = nullptr;
 		}
 		else
 		{
 			setStatus(1);
 			src_path = args.front();
-			dstImage = ptrImg;
+			dst_id = "src";
 		}
+	}
+	else if(2 == args.size())
+	{
+		setStatus(1);
+		dst_id = args.front();
+		src_path = args.back();
 	}
 	else
 	{
 		setStatus(-1);
 		src_path = "";
-		dstImage = nullptr;
 	}
 }
 

@@ -1,4 +1,4 @@
-#include "CCmdListRcs.h"
+#include "CmdListRcs.h"
 using namespace std;
 using namespace cv;
 
@@ -85,7 +85,7 @@ void CCmdListRcs::displayHelp(void)
 	cout<<"    "<<"Format: loadimage (no arguments)"<<endl;
 }
 
-void CCmdListRcs::displayError(void)
+void CCmdListRcs::displayError(int err_num)
 {
 	cout<<"    "<<getName()<<endl;
 	cout<<"    "<<"ERROR 0x002: Load image failed."<<endl;

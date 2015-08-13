@@ -42,7 +42,7 @@ void CCmdNotValid::displayHelp(void)
 	cout<<"    "<<"this is a notvalid help"<<endl;
 }
 
-void CCmdNotValid::displayError(void)
+void CCmdNotValid::displayError(int err_num)
 {
 	cout<<"    "<<getName()<<endl;
 	cout<<"    "<<"this is a notvalid error"<<endl;

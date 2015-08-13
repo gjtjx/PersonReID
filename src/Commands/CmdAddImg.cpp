@@ -1,4 +1,4 @@
-#include "CCmdAddImg.h"
+#include "CmdAddImg.h"
 using namespace std;
 using namespace cv;
 
@@ -53,11 +53,19 @@ void CCmdAddImg::execute(void)
 			}
 			case 1:
 			{
-				CImage* tmp_img = new CImage();
-				shared_ptr<CImage> tmp_ptr = make_shared<CImage>(*tmp_img);
-				rcs->push_back(tmp_ptr);
-				cout<<"    "<<"Successfully added image "<<rcs->size()-1<<endl;
-				break;
+				if(rcs->size()>=10)
+				{
+					cout<<"    "<<"Failed to added image, out of space."<<endl;
+					break;
+				}
+				else
+				{
+					CImage* tmp_img = new CImage();
+					shared_ptr<CImage> tmp_ptr = make_shared<CImage>(*tmp_img);
+					rcs->push_back(tmp_ptr);
+					cout<<"    "<<"Successfully added image "<<rcs->size()-1<<endl;
+					break;
+				}		
 			}
 			default:
 			{
@@ -80,7 +88,7 @@ void CCmdAddImg::displayHelp(void)
 	cout<<"    "<<"Format: addimg (no arguments)"<<endl;
 }
 
-void CCmdAddImg::displayError(void)
+void CCmdAddImg::displayError(int err_num)
 {
 	cout<<"    "<<getName()<<endl;
 	cout<<"    "<<"ERROR 0x002: Add image failed."<<endl;

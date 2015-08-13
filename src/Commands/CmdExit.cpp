@@ -75,7 +75,7 @@ void CCmdExit::displayHelp(void)
 	cout<<"    "<<msg<<endl;
 }
 
-void CCmdExit::displayError(void)
+void CCmdExit::displayError(int err_num)
 {
 	cout<<"    "<<"ERROR 0x002 Format not correct."<<endl;
 }

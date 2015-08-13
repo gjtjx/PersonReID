@@ -15,7 +15,7 @@ public:
 	~CCmdNotValid(void);
 	void execute(void) override;
 	void displayHelp(void) override;
-	void displayError(void) override;
+	void displayError(int err_num = 0) override;
 };
 
 #endif

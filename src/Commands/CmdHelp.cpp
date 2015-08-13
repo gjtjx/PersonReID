@@ -62,7 +62,7 @@ void CCmdHelp::displayHelp(void)
 	cout<<"    "<<"this is the general help message."<<endl;
 }
 
-void CCmdHelp::displayError(void)
+void CCmdHelp::displayError(int err_num)
 {
 	cout<<"    "<<getName()<<endl;
 	cout<<"    "<<"ERROR 0x002 Format not correct."<<endl;

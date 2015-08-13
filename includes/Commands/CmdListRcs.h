@@ -10,7 +10,7 @@ public:
 	CCmdListRcs(int status, std::shared_ptr<CImage>, std::shared_ptr<CImage>,std::vector< std::shared_ptr<CImage> >* );
 	void execute(void) override;
 	~CCmdListRcs(void);
-	void displayError(void) override;
+	void displayError(int err_num = 0) override;
 	void displayHelp(void) override;
 private:
 	std::shared_ptr<CImage> src_img;

@@ -11,7 +11,7 @@ class CCmdAddImg : public CCommand
 	CCmdAddImg(int status, std::vector< std::shared_ptr<CImage> >*);
 	void execute(void) override;
 	~CCmdAddImg(void);
-	void displayError(void) override;
+	void displayError(int err_num=0) override;
 	void displayHelp(void) override;
 private:
 	std::vector< std::shared_ptr<CImage> >*rcs;

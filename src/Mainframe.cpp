@@ -18,9 +18,8 @@ void CMainframe::Run(void)
 
 CMainframe::CMainframe(void)
 {
-	CImage* tmp_img = new CImage();
-	src_img = make_shared<CImage>(*tmp_img);
-	tmp_img = new CImage();
-	dst_img = make_shared<CImage>(*tmp_img);
-	resources.clear();
+	shared_ptr<CImage> src = make_shared<CImage>();
+	shared_ptr<CImage> dst = make_shared<CImage>();
+	resources.insert({"src",src});
+	resources.insert({"dst",dst});
 }
