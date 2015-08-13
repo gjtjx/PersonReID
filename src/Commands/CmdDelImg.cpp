@@ -89,8 +89,8 @@ void CCmdDelImg::displayError(int err_num)
 void CCmdDelImg::displayHelp()
 {
 	cout<<"    "<<getName()<<endl;
-	cout<<"    "<<"Discription: Delete an image slot"<<endl;
-	cout<<"    "<<"Format: delimg [-number]"<<endl;
+	cout<<"    "<<"Discription: Delete an image "<<endl;
+	cout<<"    "<<"Format: delimg [id]"<<endl;
 }
 
 CCmdDelImg::~CCmdDelImg(void)

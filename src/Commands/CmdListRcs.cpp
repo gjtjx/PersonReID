@@ -87,6 +87,6 @@ void CCmdListRcs::displayHelp(void)
 void CCmdListRcs::displayError(int err_num)
 {
 	cout<<"    "<<getName()<<endl;
-	cout<<"    "<<"ERROR 0x002: Load image failed."<<endl;
+	cout<<"    "<<"ERROR List resources failed."<<endl;
 	cout<<"    "<<"for more information, please use : listrcs -help"<<endl;
 }
