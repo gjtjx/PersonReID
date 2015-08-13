@@ -17,7 +17,7 @@ public:
 	virtual std::string getName(void);
 	virtual int getStatus(void);
 	virtual void displayHelp(void);
-	virtual void displayError(void);
+	virtual void displayError(int err_num = 0);
 private:
 	//the name of the command.should be set at initiation
 	std::string name;

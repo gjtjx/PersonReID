@@ -17,3 +17,16 @@ void CImage::showImage(void)
 }
 
 CImage::~CImage(void){};
+
+int CImage::getHeight(void)
+{
+	return data.size().height;
+}
+int CImage::getWidth(void)
+{
+	return data.size().width;
+}
+cv::Mat* CImage::getData(void)
+{
+	return &data;
+}

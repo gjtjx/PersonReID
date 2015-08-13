@@ -5,15 +5,14 @@
 #include <vector>
 #include "Data.h"
 #include <memory>
+#include <unordered_map>
 
 class CMainframe
 {
 public:
 	void Run();
 	CMainframe(void);
-	std::vector< std::shared_ptr<CImage> > resources;
-	std::shared_ptr<CImage> src_img;
-	std::shared_ptr<CImage> dst_img;
+	std::unordered_map<std::string,std::shared_ptr<CImage> > resources;
 };
 
 #endif

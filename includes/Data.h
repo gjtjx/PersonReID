@@ -20,6 +20,9 @@ class CImage : public CData
 public:
 	void loadImage(std::string);
 	void showImage(void);
+	int getHeight(void);
+	int getWidth(void);
+	cv::Mat* getData(void);
 	~CImage(void);
 private:
 	cv::Mat data;
